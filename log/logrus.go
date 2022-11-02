@@ -2,7 +2,6 @@ package log
 
 import (
 	"fmt"
-	"github.com/zj1244/go-logger/logger"
 	"io"
 	"io/ioutil"
 	"os"
@@ -73,7 +72,7 @@ func NewLogrusLogger(cfg LogrusConfig) *logrus.Logger {
 }
 
 func InitLogging() {
-	cfg := logger.LogrusConfig{
+	cfg := LogrusConfig{
 		EnableConsole: true,
 		EnableFile:    true,
 		Level:         logrus.TraceLevel,
@@ -81,7 +80,7 @@ func InitLogging() {
 		FileLocation:  "run.log",
 	}
 
-	appLogger := logger.NewLogrusLogger(cfg)
+	appLogger := NewLogrusLogger(cfg)
 	SetLogger(appLogger)
 }
 func SetLogger(logger *logrus.Logger) {
