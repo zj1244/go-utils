@@ -16,16 +16,17 @@ import (
 // @returns
 // manifestItem - The manifestItem containing details about image layers
 // Error - Errors, if any. Otherwise, returns nil
-func untar(tarName string, xpath string) (err error) {
+func Untar(tarName string, untarPath string) (err error) {
+
+	fmt.Printf("正在解压:%s\n", tarName)
+
 	tarFile, err := os.Open(tarName)
 	if err != nil {
 		return err
 	}
-	defer func() {
-		err = tarFile.Close()
-	}()
+	defer tarFile.Close()
 
-	absPath, err := filepath.Abs(xpath)
+	absPath, err := filepath.Abs(untarPath)
 	if err != nil {
 		return err
 	}
@@ -79,7 +80,6 @@ func untar(tarName string, xpath string) (err error) {
 			}
 			continue
 		}
-
 		// create new file with original file mode
 		file, err := os.OpenFile(absFileName, os.O_RDWR|os.O_CREATE|os.O_TRUNC, finfo.Mode().Perm())
 		if err != nil {
