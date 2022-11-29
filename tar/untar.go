@@ -54,6 +54,7 @@ func Untar(tarName string, untarPath string) (err error) {
 		// determine proper file path info
 		finfo := hdr.FileInfo()
 		fileName := hdr.Name
+		fileName = strings.Replace(fileName, ":", "_", -1)
 		if filepath.IsAbs(fileName) {
 			fileName, err = filepath.Rel("/", fileName)
 			if err != nil {
