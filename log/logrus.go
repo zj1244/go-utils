@@ -71,16 +71,19 @@ func NewLogrusLogger(cfg LogrusConfig) *logrus.Logger {
 	return appLogger
 }
 
-func InitLogging() {
+func InitLogging(level logrus.Level, options ...func(*LogrusConfig)) {
 	cfg := LogrusConfig{
 		EnableConsole: true,
 		EnableFile:    true,
-		Level:         logrus.TraceLevel,
+		Level:         level,
 		Structured:    false,
 		FileLocation:  "run.log",
 	}
-
+	for _, option := range options {
+		option(&cfg)
+	}
 	appLogger := NewLogrusLogger(cfg)
+
 	SetLogger(appLogger)
 }
 func SetLogger(logger *logrus.Logger) {

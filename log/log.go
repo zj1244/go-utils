@@ -13,9 +13,9 @@ type Logger interface {
 
 var Log Logger
 
-func init() {
-	InitLogging()
-}
+//func init() {
+//	InitLogging()
+//}
 func Error(args ...interface{}) {
 	Log.Error(args...)
 }

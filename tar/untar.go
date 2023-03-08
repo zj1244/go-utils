@@ -18,7 +18,7 @@ import (
 // Error - Errors, if any. Otherwise, returns nil
 func Untar(tarName string, untarPath string) (err error) {
 
-	fmt.Printf("正在解压:%s\n", tarName)
+	//fmt.Printf("正在解压:%s\n", tarName)
 
 	tarFile, err := os.Open(tarName)
 	if err != nil {
