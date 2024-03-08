@@ -1,5 +1,7 @@
 package log
 
+import "github.com/sirupsen/logrus"
+
 type Logger interface {
 	Errorf(format string, args ...interface{})
 	Error(args ...interface{})
@@ -13,9 +15,15 @@ type Logger interface {
 
 var Log Logger
 
-//func init() {
-//	InitLogging()
-//}
+func setSaveDir(saveDir string) func(*LogrusConfig) {
+	return func(logrusConfig *LogrusConfig) {
+		logrusConfig.FileLocation = saveDir
+	}
+}
+func init() {
+	InitLogging(logrus.InfoLevel)
+	InitLogging(logrus.InfoLevel, setSaveDir("test.log"))
+}
 func Error(args ...interface{}) {
 	Log.Error(args...)
 }
